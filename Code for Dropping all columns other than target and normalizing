@@ -1,0 +1,14 @@
+df= pd.read_csv("/content/placedata v2.0 synthetic.csv")
+target = ['SoftSkillsRating', 'AptitudeTestScore']
+clm = list(df.columns)
+clm.pop(1)
+print(clm);
+clm.pop(clm.index(target[0]))
+clm.pop(clm.index(target[1]))
+print(clm);
+df.drop(clm, axis=1, inplace=True)
+sc.fit(df)
+df =sc.transform (df)
+df = pd.DataFrame(df, columns= ["CGPA",target[0],target[1]])
+X = df["CGPA"][:500]  #cgpa
+y = df[target][:500] 
